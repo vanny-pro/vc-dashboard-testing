@@ -1,6 +1,6 @@
 # 🚀 NovaDash - SaaS Sales Dashboard
 
-NovaDash is a clean, modern, and performant Sales Dashboard built with **React**, **Tailwind CSS 4**, and **Vite**. It features real-time data parsing from a backend Express API to provide actionable business insights through a premium user interface.
+NovaDash is a clean, modern, and performant Sales Dashboard built with **Next.js App Router**, **Tailwind CSS 4**, and **React**. It features real-time data parsing from a Next.js built-in API Route to provide actionable business insights through a premium user interface.
 
 ## ✨ Features
 
@@ -16,9 +16,10 @@ NovaDash is a clean, modern, and performant Sales Dashboard built with **React**
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: [React 19](https://reactjs.org/), [Vite 7](https://vitejs.dev/), [Tailwind CSS 4](https://tailwindcss.com/)
-- **Backend API**: Node.js, [Express](https://expressjs.com/)
+- **Frontend/Backend**: [Next.js](https://nextjs.org/) (React 19)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
 - **Database**: [Supabase](https://supabase.com/)
+- **Deployment**: [Vercel](https://vercel.com/)
 
 ---
 
@@ -36,11 +37,11 @@ NovaDash is a clean, modern, and performant Sales Dashboard built with **React**
    ```
 
 ### Running Locally
-To start both the Vite development server and the backend API concurrently:
+To start the Next.js development server:
 ```bash
 npm run dev
 ```
-Then open your browser to `http://localhost:5173`.
+Then open your browser to `http://localhost:3000`.
 
 ---
 
@@ -72,3 +73,21 @@ The backend API is configured to read data from a local CSV by default, but is f
    SUPABASE_ANON_KEY=your_anon_key
    ```
 6. Restart your development server. The API will now serve data directly from Supabase!
+
+---
+
+## 🚀 Deploy to Vercel (Production)
+
+This project has been fully migrated to Next.js and is optimized for Vercel.
+
+1. Ensure your repository is pushed to GitHub.
+2. Go to [vercel.com](https://vercel.com/) and link your GitHub account.
+3. Import your `vc-dashboard-testing` repository.
+4. Add these Environment Variables in the Vercel dashboard:
+   - `NEXT_PUBLIC_GEMINI_API_KEY`
+   - `DATA_SOURCE`
+   - `SUPABASE_URL`
+   - `SUPABASE_ANON_KEY`
+5. Click **Deploy**.
+
+For more detailed instructions, checkout `production.md`.
