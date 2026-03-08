@@ -1,25 +1,11 @@
-import express from 'express';
-import cors from 'cors';
+import { NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
 import fs from 'fs';
 import path from 'path';
 import Papa from 'papaparse';
-import { fileURLToPath } from 'url';
-import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
 
-// Load environment variables from .env
-dotenv.config();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const app = express();
-app.use(cors());
-
-// --- Data Layer ---
 const dataProvider = {
   async getSalesData() {
-    // Check if Supabase keys exist in the environment
     const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
     const supabaseKey = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
     const dataSource = process.env.DATA_SOURCE || 'csv';
@@ -39,10 +25,10 @@ const dataProvider = {
       return data;
     } 
     
-    // Fallback if no Supabase keys: local CSV reading
     console.log('Fetching data from local CSV (Fallback)...');
     
-    const csvFilePath = path.join(__dirname, 'src', 'data', 'sales_data.csv');
+    // In Next.js, current working dir is root of project.
+    const csvFilePath = path.join(process.cwd(), 'src', 'data', 'sales_data.csv');
     const csvFile = fs.readFileSync(csvFilePath, 'utf8');
     
     return new Promise((resolve, reject) => {
@@ -57,17 +43,12 @@ const dataProvider = {
   }
 };
 
-app.get('/api/sales', async (req, res) => {
+export async function GET() {
   try {
     const data = await dataProvider.getSalesData();
-    res.json(data);
+    return NextResponse.json(data);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: error.message || 'Failed to read data' });
+    return NextResponse.json({ error: error.message || 'Failed to read data' }, { status: 500 });
   }
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`API Server running gracefully on http://localhost:${PORT}`);
-});
+}

@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect, useMemo } from 'react';
 import { 
   TrendingUp, 
@@ -110,7 +111,7 @@ const App = () => {
   });
   
   // AI Settings
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
+  const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY || '';
   const [selectedModel, setSelectedModel] = useState('gemini-2.5-flash');
   const [aiAnalysis, setAiAnalysis] = useState(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -131,7 +132,7 @@ const App = () => {
   }, [isDarkMode]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/sales')
+    fetch('/api/sales')
       .then(response => response.json())
       .then(parsedData => {
         setData(parsedData);

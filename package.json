@@ -4,16 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev:frontend": "vite",
-    "dev:backend": "node server.js",
-    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "@supabase/supabase-js": "^2.98.0",
+    "@tailwindcss/postcss": "^4.2.1",
     "@tailwindcss/vite": "^4.2.1",
     "clsx": "^2.1.1",
     "cors": "^2.8.6",
@@ -22,6 +21,7 @@
     "express": "^5.2.1",
     "framer-motion": "^12.35.1",
     "lucide-react": "^0.577.0",
+    "next": "^16.1.6",
     "papaparse": "^5.5.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
